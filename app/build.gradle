@@ -15,8 +15,8 @@ android {
         applicationId "com.termux.styling"
         minSdk project.properties.minSdkVersion.toInteger()
         targetSdk project.properties.targetSdkVersion.toInteger()
-        versionCode 32
-        versionName "0.32.0"
+        versionCode 1000
+        versionName "0.32.1"
 
         if (appVersionName) versionName = appVersionName
         validateVersionName(versionName)
@@ -54,11 +54,8 @@ android {
 
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
-            if (variant.buildType.name == "debug") {
-                outputFileName = new File("termux-styling_" + (apkVersionTag ? apkVersionTag : "debug") + ".apk")
-            } else if (variant.buildType.name == "release") {
-                outputFileName = new File("termux-styling_" + (apkVersionTag ? apkVersionTag : "release") + ".apk")
-            }
+            outputFileName = new File("termux-styling-app_" +
+                    (apkVersionTag ? apkVersionTag : "v" + versionName + "+" + variant.buildType.name) + ".apk")
         }
     }
 }
